@@ -9,6 +9,8 @@ Adafruit Radio FeatherWing
 Adafruit Feather ESP32 V2
 ### Conexiones pines:
 
- https://github.com/adafruit/Adafruit-ESP32-Feather-V2-PCB/blob/main/Adafruit%20ESP32%20Feather%20V2%20Pinout.pdf
+![Image text](hhttps://github.com/adafruit/Adafruit-ESP32-Feather-V2-PCB/blob/main/Adafruit%20ESP32%20Feather%20V2%20Pinout.pdf)
+
+ 
 
 
