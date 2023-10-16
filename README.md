@@ -13,7 +13,7 @@ Arduino IDE versión 2.2.1
 Placa Esp32 de espressif version 2.0.4  
 ## Conexiones pines:
 
-![Image text](hhttps://github.com/adafruit/Adafruit-ESP32-Feather-V2-PCB/blob/main/Adafruit%20ESP32%20Feather%20V2%20Pinout.pdf)]
+![Image text](https://github.com/DaniAntolin/NodoIoT_RFM69/blob/V1.0/imagenes/imagenes/adafruit_products_Adafruit_ESP32_Feather_V2_Pinout.png)]
 
 ### Placa Adafruit Feather ESP32 V2
 SCK -> Pin 5  
