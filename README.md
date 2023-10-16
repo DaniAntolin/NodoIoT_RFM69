@@ -27,6 +27,10 @@ IRQ -> Pin 27
 Para el desarroyo de este proyecto se divirá en tres partes que de forma independiente se podrá testear las diferentes fases del proyecto: Recibir, Guardar y Enviar.  
 Estas tres fases serán las implementadas en un archivo .ino que posteriormente serán junatadas en un archivo .ino final.  
 ### Recibir.
+Esta fase tiene como objetivo recibir paquetes de las distintas estaciones con los datos obtenidos en sus sensores.
+El Sensor Transmitter Davis tiene en su interior 4 switches que dependiendo si estan en **ON** u **OFF** representan un canal u otro.
+Dependiendo del canal escogido transmitirá mas o menos lento los paquetes segun la siguiente equación:
+$**(41 + ID)/16 [segundos]**$
 ### Guardar.
 ### Enviar.
 
