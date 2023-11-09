@@ -33,12 +33,12 @@ El Sensor Transmitter Davis tiene en su interior 4 switches que dependiendo si e
 Dependiendo del canal escogido transmitirá mas o menos lento los paquetes segun la siguiente equación:  
 **(41 + ID)/16 [segundos]**  
 ### Guardar.
-### Enviar.
+### Enviar.  
 
 
 
 
-```mermaid
+```mermaid  
 graph TD;
     initialize_radio & set_chanel(0)-->loop_start;
     loop_start-->packet recived?;
@@ -68,7 +68,7 @@ graph TD;
     next_channel-->end_loop;
     end_loop-->loop_start;
 
-```
+```  
 
 
 
