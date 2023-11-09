@@ -37,6 +37,41 @@ Dependiendo del canal escogido transmitirá mas o menos lento los paquetes segun
 
 
 
+
+```mermaid
+graph TD;
+    initialize_radio & set_chanel(0)-->loop_start;
+    loop_start-->packet recived?;
+    packet recived?-- Yes -->packetsRecived++;
+    packet recived?-- No -->end_recive_block;
+    packetsRecived++-->correct CRC?;
+    correct CRC?-- Yes -->correctID?;
+    correct CRC?-- No -->crcErrors++;
+    correctID?-- Yes -->hop_count=1;
+    correctID?-- No -->IDerrors++;
+    crcErrors++-->correctCRC & correctID?;
+    IDerrors++-->correctCRC & correctID?;
+    hop_count=1-->correctCRC & correctID?;
+    correctCRC & correctID?-- Yes -->lastRxTime=millis() ./ radio.hop();
+    correctCRC & correctID?-- No -->wait same chanel;
+    lastRxTime=millis() ./ radio.hop()-->end_recive_block;
+    wait same chanel-->end_recive_block;
+    end_recive_block-->recived paket on time?;
+    recived paket on time?-- No -->packetsMissed++;
+    recived paket on time?-- Yes -->end_loop;
+    packetsMissed++-->hop_count?;
+    hop_count?-- 2-4 -->next_channel;
+    hop_count?-- >4 -->hop_count=0;
+    hop_count?-- 1 -->numResyncs++;
+    hop_count=0-->next_channel;
+    numResyncs++-->next_channel;
+    next_channel-->end_loop;
+    end_loop-->loop_start;
+
+```
+
+
+
  
 
 
