@@ -41,6 +41,10 @@ Dependiendo del canal escogido transmitirá mas o menos lento los paquetes segun
 ```mermaid
 graph TD;
     A["initialize_radio & set_chanel(0)"]-->B[loop_start];
+    B["loop_start"]-->C["packet recived?"];
+    C["packet recived?"]-- Yes -->D[packetsRecived++];
+    C["packet recived?"]-- No -->E[end_recive_block];
+    D[packetsRecived++]-->F["correct CRC?"];
 ```
 
 
