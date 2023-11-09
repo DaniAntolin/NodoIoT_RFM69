@@ -44,6 +44,16 @@ graph TD;
     2["loop_start"]-->3["packet recived?"];
     3["packet recived?"]-- Yes -->4["packetsRecived++"];
     3["packet recived?"]-- No -->13["end_recive_block"];
+    4["packetsRecived++"]-->5["correct CRC?"];
+    5["correct CRC?"]-- Yes -->6["correctID?"];
+    5["correct CRC?"]-- No -->7["crcErrors++];
+    6["correctID?"]-- Yes -->9["hop_count=1"];
+    6["correctID?"]-- No -->8["IDerrors++"];
+    7["crcErrors++]-->10["correctCRC & correctID?"];
+    8["IDerrors++"]-->10["correctCRC & correctID?"];
+    9["hop_count=1"]-->10["correctCRC & correctID?"];
+    10["correctCRC & correctID?"]-- Yes -->11["lastRxTime=millis() ./ radio.hop()"];
+    10["correctCRC & correctID?"]-- No -->12["wait same chanel"];
     
 ```
 
