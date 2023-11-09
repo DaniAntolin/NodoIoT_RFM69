@@ -40,7 +40,7 @@ Dependiendo del canal escogido transmitirá mas o menos lento los paquetes segun
 
 ```mermaid
 graph TD;
-    initialize_radio & set_chanel(0)-->loop_start;
+    "initialize_radio & set_chanel(0)"-->"loop_start";
 ```
 
 
