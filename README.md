@@ -38,7 +38,7 @@ Dependiendo del canal escogido transmitirá mas o menos lento los paquetes segun
 
 
 
-```mermaid
+¡'''mermaid
 graph TD;
     initialize_radio & set_chanel(0)-->loop_start;
     loop_start-->packet recived?;
@@ -68,7 +68,7 @@ graph TD;
     next_channel-->end_loop;
     end_loop-->loop_start;
 
-```
+'''
 
 
 
