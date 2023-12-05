@@ -72,12 +72,15 @@ graph TD;
 
 ```mermaid
 graph TD
-    1["initialize_radio & set_channel(0)"] --> 2["Setup WiFi"];
-    3("loop_start") --> 4["Check for Client"];
-    3 --> 5["Handle Client Requests"];
-    5 --> 6["Control GPIO"];
-    6 --> 7["Handle Specific Requests"];
-    7 --> 8["Update Response"];
+  A[ESP32/ESP8266] -->|WiFi Library| B(WiFi);
+  C(Setup) -->|Initialize WiFi| D(Initialize Server);
+  E(Loop) -->|Handle Clients| F(Handle Requests);
+  G(GPIO Control) -->|LED Control| H(PWM Control);
+  G -->|Analog Read| I(Potentiometer);
+  G -->|Temperature Read| J(Temperature Sensor);
+  D -->|Handle HTTP Requests| F;
+  F -->|Generate HTTP Response| G;
+
 
 
 ```
