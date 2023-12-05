@@ -91,9 +91,7 @@ graph TD;
   F -->|Handle GET /verdeOFF| G;
   F -->|Handle POST /led| G;
 
-  style A,B,C,D,E,F,G,H,I,J,K fill:#ffffff,stroke:#000000,stroke-width:2px;
-  style graph, rect stroke:#000000, stroke-width:2px;
-  style arrowhead, link arrowhead:open;
+  
 
 
 
