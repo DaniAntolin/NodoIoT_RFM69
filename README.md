@@ -122,7 +122,6 @@ graph TD
   L -->|LED Control| F
   L -->|Potentiometer Reading| G
   L -->|Temperature Reading| H
-
 ```
 
  
