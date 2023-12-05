@@ -81,21 +81,19 @@ graph TD;
   G -->|Proximity Sensor| K(Proximity Sensor)
   D -->|Handle HTTP Requests| F
   F -->|Generate HTTP Response| G
-  subgraph GET_Requests
-    F -->|Handle GET /habon| G
-    F -->|Handle GET /haboff| G
-    F -->|Handle GET /sala| G
-    F -->|Handle GET /comedor| G
-    F -->|Handle GET /temperatura| G
-    F -->|Handle GET /potenciometro| G
-    F -->|Handle GET /verdeON| G
-    F -->|Handle GET /verdeOFF| G
-  end
+  F -->|Handle GET /habon| G
+  F -->|Handle GET /haboff| G
+  F -->|Handle GET /sala| G
+  F -->|Handle GET /comedor| G
+  F -->|Handle GET /temperatura| G
+  F -->|Handle GET /potenciometro| G
+  F -->|Handle GET /verdeON| G
+  F -->|Handle GET /verdeOFF| G
   F -->|Handle POST /led| G
 
   style A,B,C,D,E,F,G,H,I,J,K fill:#ffffff,stroke:#000000,stroke-width:2px;
-  style graph,subgraph rect stroke:#000000,stroke-width:2px;
-  style arrowhead,link arrowhead:open;
+  style graph, rect stroke:#000000, stroke-width:2px;
+  style arrowhead, link arrowhead:open;
 
 
 
