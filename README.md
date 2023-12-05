@@ -70,6 +70,46 @@ graph TD;
 ```
 
 
+```mermaid
+graph TB
+    A[Preprocesador] --> B[Configuración]
+    B --> C[Loop]
+    subgraph "Preprocesador"
+    A1[#if defined(ESP32)] --> A2[#include <WiFi.h>]
+    A3[#elif defined(ESP8266)] --> A4[#include <ESP8266WiFi.h>]
+    end
+    subgraph "Configuración"
+    B1[setup()] --> B2[Serial.begin()]
+    B2 --> B3[pinMode()]
+    B3 --> B4[digitalWrite()]
+    B4 --> B5[ledcSetup()]
+    B5 --> B6[ledcAttachPin()]
+    B6 --> B7[Serial.print()]
+    B7 --> B8[WiFi.begin()]
+    B8 --> B9[while(WiFi.status() != WL_CONNECTED)]
+    B9 --> B10[Serial.println()]
+    B10 --> B11[server.begin()]
+    end
+    subgraph "Loop"
+    C1[loop()] --> C2[WiFiClient client = server.available()]
+    C2 --> C3[if(client)]
+    C3 --> C4[while(client.connected() && millis() - lastTime <= timeout)]
+    C4 --> C5[if(client.available())]
+    C5 --> C6[char c = client.read()]
+    C6 --> C7[header += c]
+    C7 --> C8[if(c == '\n')]
+    C8 --> C9[if(currentLine.length() == 0)]
+    C9 --> C10[client.println()]
+    C10 --> C11[if (header.indexOf("GET /habon") >= 0)]
+    C11 --> C12[else if (header.indexOf("GET /haboff") >= 0)]
+    C12 --> C13[else if (header.indexOf("GET /sala") >= 0)]
+    C13 --> C14[else if (header.indexOf("GET /comedor") >= 0)]
+    C14 --> C15[else if (header.indexOf("GET /temperatura") >= 0)]
+    C15 --> C16[else if (header.indexOf("GET /potenciometro") >= 0)]
+    C16 --> C17[else if (header.indexOf("POST /led") >= 0)]
+    end
+```
+
  
 
 
