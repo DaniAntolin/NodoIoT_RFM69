@@ -72,30 +72,13 @@ graph TD;
 
 ```mermaid
 graph TD
-  subgraph cluster_Setup;
     1["initialize_radio & set_channel(0)"] --> 2["Setup WiFi"];
-    style 1 fill:#78c7c7,stroke:#006666,stroke-width:2px;
-    style 2 fill:#78c7c7,stroke:#006666,stroke-width:2px;
-  end;
-
-  subgraph cluster_Loop;
     3("loop_start") --> 4["Check for Client"];
     3 --> 5["Handle Client Requests"];
-    style 3 fill:#ffd699,stroke:#cc6600,stroke-width:2px;
-    style 4 fill:#c7e2ff,stroke:#3366cc,stroke-width:2px;
-    style 5 fill:#c7e2ff,stroke:#3366cc,stroke-width:2px;
-  end;
-
-  subgraph cluster_GPIO;
     5 --> 6["Control GPIO"];
     6 --> 7["Handle Specific Requests"];
     7 --> 8["Update Response"];
-    style 6 fill:#c7e2ff,stroke:#3366cc,stroke-width:2px;
-    style 7 fill:#c7e2ff,stroke:#3366cc,stroke-width:2px;
-    style 8 fill:#c7e2ff,stroke:#3366cc,stroke-width:2px;
-  end;
 
-  style subgraph fill:#e6f7ff,stroke:#3366cc,stroke-width:2px;
 
 ```
 
