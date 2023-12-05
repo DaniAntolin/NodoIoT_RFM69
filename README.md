@@ -72,56 +72,31 @@ graph TD;
 
 ```mermaid
 graph TD
-  subgraph cluster_Board
-    A[ESP32/ESP8266] -->|WiFi Library| B(WiFi)
-    style A fill:#78c7c7,stroke:#006666,stroke-width:2px;
-    style B fill:#78c7c7,stroke:#006666,stroke-width:2px;
+  subgraph cluster_Setup
+    1["initialize_radio & set_channel(0)"] --> 2["Setup WiFi"]
+    style 1 fill:#78c7c7,stroke:#006666,stroke-width:2px;
+    style 2 fill:#78c7c7,stroke:#006666,stroke-width:2px;
   end
 
-  subgraph cluster_Server
-    C(Server) -->|Handling Requests| E{Request Handling}
-    style C fill:#78c7c7,stroke:#006666,stroke-width:2px;
-    style E fill:#c7e2ff,stroke:#3366cc,stroke-width:2px;
-  end
-
-  subgraph cluster_Client
-    D(Client) -->|HTTP Requests| C
-    style D fill:#78c7c7,stroke:#006666,stroke-width:2px;
+  subgraph cluster_Loop
+    3("loop_start") --> 4["Check for Client"]
+    3 --> 5["Handle Client Requests"]
+    style 3 fill:#ffd699,stroke:#cc6600,stroke-width:2px;
+    style 4 fill:#c7e2ff,stroke:#3366cc,stroke-width:2px;
+    style 5 fill:#c7e2ff,stroke:#3366cc,stroke-width:2px;
   end
 
   subgraph cluster_GPIO
-    E -->|GPIO Control| F[LED Control]
-    E -->|Analog Read| G[Potentiometer]
-    E -->|Temperature Read| H[Temperature Sensor]
-    F -->|PWM Control| I[PWM Pin]
-    G -->|Analog Input| J[Potentiometer Pin]
-    H -->|Temperature Output| K[Temperature Pin]
-    style F fill:#c7e2ff,stroke:#3366cc,stroke-width:2px;
-    style G fill:#c7e2ff,stroke:#3366cc,stroke-width:2px;
-    style H fill:#c7e2ff,stroke:#3366cc,stroke-width:2px;
-    style I fill:#c7e2ff,stroke:#3366cc,stroke-width:2px;
-    style J fill:#c7e2ff,stroke:#3366cc,stroke-width:2px;
-    style K fill:#c7e2ff,stroke:#3366cc,stroke-width:2px;
+    5 --> 6["Control GPIO"]
+    6 --> 7["Handle Specific Requests"]
+    7 --> 8["Update Response"]
+    style 6 fill:#c7e2ff,stroke:#3366cc,stroke-width:2px;
+    style 7 fill:#c7e2ff,stroke:#3366cc,stroke-width:2px;
+    style 8 fill:#c7e2ff,stroke:#3366cc,stroke-width:2px;
   end
 
   style subgraph fill:#e6f7ff,stroke:#3366cc,stroke-width:2px;
 
-  subgraph cluster_Code
-    L[setup()]
-    M[loop()]
-    L -->|Initial Setup| A
-    M -->|Handling Requests| E
-    M -->|GPIO Control| F
-    M -->|Analog Read| G
-    M -->|Temperature Read| H
-  end
-
-  style L fill:#ffd699,stroke:#cc6600,stroke-width:2px;
-  style M fill:#ffd699,stroke:#cc6600,stroke-width:2px;
-
-  L -->|LED Control| F
-  L -->|Potentiometer Reading| G
-  L -->|Temperature Reading| H
 ```
 
  
