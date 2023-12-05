@@ -107,7 +107,6 @@ graph TB
     C14 --> C15[else if (header.indexOf("GET /temperatura") >= 0)]
     C15 --> C16[else if (header.indexOf("GET /potenciometro") >= 0)]
     C16 --> C17[else if (header.indexOf("POST /led") >= 0)]
-    end
 ```
 
  
