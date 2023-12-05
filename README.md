@@ -71,43 +71,58 @@ graph TD;
 
 
 ```mermaid
-graph TD;
-    A[Preprocesador] --> B[Configuración];
-    B --> C[Loop];
-    subgraph "Preprocesador";
-    A1[#if defined(ESP32)] --> A2[#include <WiFi.h>];
-    A3[#elif defined(ESP8266)] --> A4[#include <ESP8266WiFi.h>];
-    end;
-    subgraph "Configuración";
-    B1[setup()] --> B2[Serial.begin()];
-    B2 --> B3[pinMode()];
-    B3 --> B4[digitalWrite()];
-    B4 --> B5[ledcSetup()];
-    B5 --> B6[ledcAttachPin()];
-    B6 --> B7[Serial.print()];
-    B7 --> B8[WiFi.begin()];
-    B8 --> B9[while(WiFi.status() != WL_CONNECTED)];
-    B9 --> B10[Serial.println()];
-    B10 --> B11[server.begin()];
-    end;
-    subgraph "Loop";
-    C1[loop()] --> C2[WiFiClient client = server.available()];
-    C2 --> C3[if(client)];
-    C3 --> C4[while(client.connected() && millis() - lastTime <= timeout)];
-    C4 --> C5[if(client.available())];
-    C5 --> C6[char c = client.read()];
-    C6 --> C7[header += c];
-    C7 --> C8[if(c == '\n')];
-    C8 --> C9[if(currentLine.length() == 0)];
-    C9 --> C10[client.println()];
-    C10 --> C11[if (header.indexOf("GET /habon") >= 0)];
-    C11 --> C12[else if (header.indexOf("GET /haboff") >= 0)];
-    C12 --> C13[else if (header.indexOf("GET /sala") >= 0)];
-    C13 --> C14[else if (header.indexOf("GET /comedor") >= 0)];
-    C14 --> C15[else if (header.indexOf("GET /temperatura") >= 0)];
-    C15 --> C16[else if (header.indexOf("GET /potenciometro") >= 0)];
-    C16 --> C17[else if (header.indexOf("POST /led") >= 0)];
-    end;
+graph TD
+  subgraph cluster_Board
+    A[ESP32/ESP8266] -->|WiFi Library| B(WiFi)
+    style A fill:#78c7c7,stroke:#006666,stroke-width:2px;
+    style B fill:#78c7c7,stroke:#006666,stroke-width:2px;
+  end
+
+  subgraph cluster_Server
+    C(Server) -->|Handling Requests| E{Request Handling}
+    style C fill:#78c7c7,stroke:#006666,stroke-width:2px;
+    style E fill:#c7e2ff,stroke:#3366cc,stroke-width:2px;
+  end
+
+  subgraph cluster_Client
+    D(Client) -->|HTTP Requests| C
+    style D fill:#78c7c7,stroke:#006666,stroke-width:2px;
+  end
+
+  subgraph cluster_GPIO
+    E -->|GPIO Control| F[LED Control]
+    E -->|Analog Read| G[Potentiometer]
+    E -->|Temperature Read| H[Temperature Sensor]
+    F -->|PWM Control| I[PWM Pin]
+    G -->|Analog Input| J[Potentiometer Pin]
+    H -->|Temperature Output| K[Temperature Pin]
+    style F fill:#c7e2ff,stroke:#3366cc,stroke-width:2px;
+    style G fill:#c7e2ff,stroke:#3366cc,stroke-width:2px;
+    style H fill:#c7e2ff,stroke:#3366cc,stroke-width:2px;
+    style I fill:#c7e2ff,stroke:#3366cc,stroke-width:2px;
+    style J fill:#c7e2ff,stroke:#3366cc,stroke-width:2px;
+    style K fill:#c7e2ff,stroke:#3366cc,stroke-width:2px;
+  end
+
+  style subgraph fill:#e6f7ff,stroke:#3366cc,stroke-width:2px;
+
+  subgraph cluster_Code
+    L[setup()]
+    M[loop()]
+    L -->|Initial Setup| A
+    M -->|Handling Requests| E
+    M -->|GPIO Control| F
+    M -->|Analog Read| G
+    M -->|Temperature Read| H
+  end
+
+  style L fill:#ffd699,stroke:#cc6600,stroke-width:2px;
+  style M fill:#ffd699,stroke:#cc6600,stroke-width:2px;
+
+  L -->|LED Control| F
+  L -->|Potentiometer Reading| G
+  L -->|Temperature Reading| H
+
 ```
 
  
