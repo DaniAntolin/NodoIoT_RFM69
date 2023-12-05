@@ -72,7 +72,6 @@ graph TD;
 
 ```mermaid
 graph TD
-  graph TD
   A[ESP32/ESP8266] -->|WiFi Library| B(WiFi)
   C(Setup) -->|Initialize WiFi| D(Initialize Server)
   E(Loop) -->|Handle Clients| F(Handle Requests)
