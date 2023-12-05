@@ -72,14 +72,26 @@ graph TD;
 
 ```mermaid
 graph TD
-  A[ESP32/ESP8266] -->|WiFi Library| B(WiFi);
-  C(Setup) -->|Initialize WiFi| D(Initialize Server);
-  E(Loop) -->|Handle Clients| F(Handle Requests);
-  G(GPIO Control) -->|LED Control| H(PWM Control);
-  G -->|Analog Read| I(Potentiometer);
-  G -->|Temperature Read| J(Temperature Sensor);
-  D -->|Handle HTTP Requests| F;
-  F -->|Generate HTTP Response| G;
+  graph TD
+  A[ESP32/ESP8266] -->|WiFi Library| B(WiFi)
+  C(Setup) -->|Initialize WiFi| D(Initialize Server)
+  E(Loop) -->|Handle Clients| F(Handle Requests)
+  G(GPIO Control) -->|LED Control| H(PWM Control)
+  G -->|Analog Read| I(Potentiometer)
+  G -->|Temperature Read| J(Temperature Sensor)
+  G -->|Proximity Sensor| K(Proximity Sensor)
+  D -->|Handle HTTP Requests| F
+  F -->|Generate HTTP Response| G
+  F -->|Handle GET /habon| G
+  F -->|Handle GET /haboff| G
+  F -->|Handle GET /sala| G
+  F -->|Handle GET /comedor| G
+  F -->|Handle GET /temperatura| G
+  F -->|Handle GET /potenciometro| G
+  F -->|Handle POST /led| G
+  F -->|Handle GET /verdeON| G
+  F -->|Handle GET /verdeOFF| G
+
 
 
 
